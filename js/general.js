@@ -123,7 +123,7 @@ jQuery(document).ready(function ($) {
     }
 
     // =============================================
-    // From here and to the end triggers for actions
+    // From here and to the end are triggers for actions
     // =============================================
 
     $('#search').change(function () {
