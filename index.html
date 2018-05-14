@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Craft beer</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="js/libs/jquery-1.12.4.min.js" type="application/javascript"></script>
+    <script src="js/libs/handlebars.min.js" type="application/javascript"></script>
+    <script src="js/libs/bootstrap.min.js" type="application/javascript"></script>
+    <script src="js/script.js" type="application/javascript"></script>
+
+</head>
+<body>
+    <header>
+        <a href="#" id="logo">
+            <img src="images/craftbeer.png" alt="Craft beer" title="Craft beer" />
+        </a>
+    </header>
+    <main>
+        <div class="slider-wrap">
+            <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel"></div>
+        </div>
+        <div id="sort-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="order">
+                        <label for="order-name">Order by:</label>
+                        <select name="" id="order-name">
+                            <option value="id" selected>ID</option>
+                            <option value="abv">ABV</option>
+                            <option value="ibu">IBU</option>
+                            <option value="ebc">EBC</option>
+                            <option value="name">Name</option>
+                        </select>
+                        <select name="" id="order">
+                            <option value="asc" selected>ASC</option>
+                            <option value="desc">DESC</option>
+                        </select>
+                    </div>
+                    <div class="search">
+                    <label for="search">Search by name:</label>
+                    <input type="text" id="search" placeholder="Name">
+                </div>
+                    <div id="filters">
+                        <div class="filter-rows">
+                            <label for="filter-name">Filter:</label>
+                            <div class="filter proto">
+                                <select name="" id="filter-name">
+                                    <option value="" selected></option>
+                                    <option value="abv">ABV</option>
+                                    <option value="ibu">IBU</option>
+                                    <option value="ebc">EBC</option>
+                                </select>
+                                <select name="" id="filter-cond">
+                                    <option value="" selected></option>
+                                    <option value=">=">greater</option>
+                                    <option value="<=">less</option>
+                                </select>
+                                than
+                                <input type="number" min="0" id="filter-val" value="" />
+                                <a href="#" class="remove-filter"></a>
+                            </div>
+                        </div>
+                        <a href="#" id="add-filter">Add filter</a>
+                    </div>
+                    <a href="#" class="filter-trigger">Apply</a>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="filter-trigger">Show filters</a>
+        <div id="beers-list-wrap" class="container"></div>
+    </main>
+    <div id="sidepanel-img" class="left"></div>
+    <div id="sidepanel" class="right"></div>
+
+</body>
+</html>

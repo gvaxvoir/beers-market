@@ -1,0 +1,17 @@
+{
+  "name": "Beer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "gulp-sass": "^4.0.1",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^5.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": ""
+}
