@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-  // request data
+    // request data
     var page     = 1,
         per_page = 10,
         beers = [];
@@ -21,6 +21,7 @@ jQuery(document).ready(function ($) {
     }
     loadData();
 
+    // Sorting by attribute
     function sorterBy(key, order) {
         return function(a, b) {
             if(!a.hasOwnProperty(key) ||
@@ -45,6 +46,7 @@ jQuery(document).ready(function ($) {
         };
     }
 
+    // Filtering by attribute
     function filter() {
         var beersFiltered = beers;
 
@@ -62,10 +64,10 @@ jQuery(document).ready(function ($) {
             }
         });
 
-        // beersFiltered.sort(sorterBy(by, lvl));
         render(beersFiltered);
     }
 
+    // Search in names
     function search() {
         var partName = $('#search').val().toLowerCase();
         var beersFiltered = beers;
@@ -74,7 +76,8 @@ jQuery(document).ready(function ($) {
         });
         render(beersFiltered);
     }
-    
+
+    // Top slider init
     function sliderInit(array) {
         var beers = array;
 
@@ -83,6 +86,45 @@ jQuery(document).ready(function ($) {
             $('#carousel').html('').append(template(beers));
         }, 'html');
     }
+
+    // Function for list of items render
+    function render(array) {
+        var beers = array;
+
+        $.get('templates/beer_list.hbs', function (data) {
+            var template = Handlebars.compile(data);
+            $('#beers-list-wrap').html('').append(template(beers));
+        }, 'html');
+    }
+
+    // Function for getting information about item
+    function getDesc(id) {
+        $.ajax({
+            type: "GET",
+            url: "https://api.punkapi.com/v2/beers/" + id,
+            data: '',
+            cache: false,
+            success: function(data){
+                var info = data;
+
+                $.get('templates/description_img.hbs', function (data) {
+                    var template = Handlebars.compile(data);
+                    $('#sidepanel-img').html('').append(template(info)).toggleClass('desc-opened');
+                }, 'html');
+
+                $.get('templates/description_text.hbs', function (data) {
+                    var template = Handlebars.compile(data);
+                    $('#sidepanel').html('').append(template(info)).toggleClass('desc-opened');
+                }, 'html');
+
+                $('body').toggleClass('no-scroll');
+            }
+        });
+    }
+
+    // =============================================
+    // From here and to the end triggers for actions
+    // =============================================
 
     $('#search').change(function () {
         search();
@@ -132,38 +174,5 @@ jQuery(document).ready(function ($) {
         $('#sidepanel, #sidepanel-img').toggleClass('desc-opened');
         $('body').toggleClass('no-scroll');
     });
-
-    function render(array) {
-        var beers = array;
-
-        $.get('templates/beer_list.hbs', function (data) {
-            var template = Handlebars.compile(data);
-            $('#beers-list-wrap').html('').append(template(beers));
-        }, 'html');
-    }
-
-    function getDesc(id) {
-        $.ajax({
-            type: "GET",
-            url: "https://api.punkapi.com/v2/beers/" + id,
-            data: '',
-            cache: false,
-            success: function(data){
-                var info = data;
-
-                $.get('templates/description_img.hbs', function (data) {
-                    var template = Handlebars.compile(data);
-                    $('#sidepanel-img').html('').append(template(info)).toggleClass('desc-opened');
-                }, 'html');
-
-                $.get('templates/description_text.hbs', function (data) {
-                    var template = Handlebars.compile(data);
-                    $('#sidepanel').html('').append(template(info)).toggleClass('desc-opened');
-                }, 'html');
-
-                $('body').toggleClass('no-scroll');
-            }
-        });
-    }
 
 });

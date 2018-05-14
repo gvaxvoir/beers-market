@@ -14,6 +14,10 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./css'));
 });
 
-gulp.task('sass:watch', function () {
+gulp.task('watch', function () {
     gulp.watch('./sass/**/*.scss', ['sass']);
+});
+
+gulp.task('default', function() {
+    gulp.start('sass');
 });
